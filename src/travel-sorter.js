@@ -1,8 +1,11 @@
-class TravelSorter {
+import TransportTypes from './transport-types';
+
+export class TravelSorter {
 
   constructor(data) {
     this.data = [];
     this.sortedData = [];
+    this.isSorted = false;
     if (data && data instanceof Array) {
       this.data = data;
       this.count = data.length + 1;
@@ -11,10 +14,12 @@ class TravelSorter {
 
   addTrips(trips) {
     this.data = [...this.data, ...trips];
+    this.isSorted = false;
   }
 
   addTrip(trip) {
     this.data.push(trip);
+    this.isSorted = false;
   }
 
   _getRootOrigin() {
@@ -47,6 +52,7 @@ class TravelSorter {
 
     this.sortedData.push(root);
     this._findAndPushAllDestinations(this._getLocationHash(root.destination.location));
+    this.isSorted = true;
   }
 
   _getLocationHash(location) {
@@ -54,6 +60,10 @@ class TravelSorter {
   }
 
   getSortedTrips() {
+    if ( !this.isSorted ) {
+      throw new Error('Your trips has not already sorted! Call sortTrips method.')
+    }
+
     return this.sortedData;
   }
 
@@ -64,9 +74,23 @@ class TravelSorter {
       throw new Error(`element "${elementPath}" not found!`)
     }
 
+    element.innerHTML = this._getFormatedText();
+  }
+
+  _getFormatedText() {
+    let result = '<ul>';
+
+    if ( !this.isSorted ) {
+      throw new Error('Your trips has not already sorted! Call sortTrips method.')
+    }
+
+    this.sortedData.forEach((trip) => {
+      const transportType = TransportTypes.find((transportType) => transportType.id === trip.transport.type);
+      result += `<li>${transportType.formatter(trip)}</li>`;
+    });
+
+    result += '</ul>';
+
+    return result;
   }
 }
-
-module.exports = {
-  TravelSorter
-};

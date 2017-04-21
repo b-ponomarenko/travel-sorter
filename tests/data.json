@@ -1,7 +1,4 @@
-import { expect } from 'chai';
-// const expect = require('chai').expect;
-const {TravelSorter} = require('../src/travelSorter');
-const data = [
+[
   {
     "origin": {
       "name": "Miami",
@@ -16,6 +13,13 @@ const data = [
         "latitude": -45.40303,
         "longitude": -72.69184
       }
+    },
+    "transport": {
+      "type": 1,
+      "flight": "SK455",
+      "gate": "45B",
+      "seat": "3A",
+      "baggage": 344
     }
   },
   {
@@ -32,6 +36,11 @@ const data = [
         "latitude": 52.08806,
         "longitude": -7.62528
       }
+    },
+    "transport": {
+      "type": 4,
+      "color": "yellow",
+      "brand": "Ford"
     }
   },
   {
@@ -48,6 +57,12 @@ const data = [
         "latitude": -6.9185,
         "longitude": 113.3676
       }
+    },
+    "transport": {
+      "type": 5,
+      "number": "035",
+      "seat": 48,
+      "wagon": 4
     }
   },
   {
@@ -64,6 +79,10 @@ const data = [
         "latitude": -7.0014,
         "longitude": 112.5106
       }
+    },
+    "transport": {
+      "type": 3,
+      "seat": 48
     }
   },
   {
@@ -80,6 +99,13 @@ const data = [
         "latitude": 22.53511,
         "longitude": 91.91919
       }
+    },
+    "transport": {
+      "type": 1,
+      "flight": "SB455",
+      "gate": "45B",
+      "seat": "3A",
+      "baggage": null
     }
   },
   {
@@ -96,6 +122,13 @@ const data = [
         "latitude": 1.15167,
         "longitude": 33.155
       }
+    },
+    "transport": {
+      "type": 2,
+      "route": "SK123w",
+      "cabin": 3,
+      "seat": 15,
+      "class": 2
     }
   },
   {
@@ -112,6 +145,13 @@ const data = [
         "latitude": 48.68611,
         "longitude": 14.57678
       }
+    },
+    "transport": {
+      "type": 1,
+      "flight": "SB455",
+      "gate": "45B",
+      "seat": "3A",
+      "baggage": null
     }
   },
   {
@@ -128,6 +168,13 @@ const data = [
         "latitude": 45.7485,
         "longitude": 4.8467
       }
+    },
+    "transport": {
+      "type": 1,
+      "flight": "SB455",
+      "gate": "45B",
+      "seat": "3A",
+      "baggage": null
     }
   },
   {
@@ -144,33 +191,10 @@ const data = [
         "latitude": -8.4788,
         "longitude": 117.4132
       }
+    },
+    "transport": {
+      "type": 3,
+      "seat": 48
     }
   }
-];
-
-
-const sortedSummerTrips = new TravelSorter(data);
-sortedSummerTrips.sortTrips();
-
-describe('TravelSorter', () => {
-  it('find first trip', () => {
-    expect(sortedSummerTrips.sortedData[0].origin.name).to.be.equal("Saint-Petersburg");
-    expect(sortedSummerTrips.sortedData[0].destination.name).to.be.equal("Moscow");
-
-  })
-
-  it('find second trip', () => {
-    expect(sortedSummerTrips.sortedData[1].origin.name).to.be.equal("Moscow");
-    expect(sortedSummerTrips.sortedData[1].destination.name).to.be.equal("New York");
-  })
-
-  it('find last trip', () => {
-    const length = sortedSummerTrips.sortedData.length;
-    expect(sortedSummerTrips.sortedData[length-1].origin.name).to.be.equal("London");
-    expect(sortedSummerTrips.sortedData[length-1].destination.name).to.be.equal("Beijing");
-  });
-
-  it('count of trips', () => {
-    expect(sortedSummerTrips.count).to.be.equal(10);
-  })
-})
+]
