@@ -1,23 +1,29 @@
 const path = require('path');
 
 module.exports = {
-  entry: './index.js',
+  entry: './src/travel-sorter.js',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+    library: 'TravelSorter',
+    libraryTarget: 'commonjs-module'
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015']
-          }
+          loader: 'babel-loader'
         }
-      }
+      },
+       {
+         test: /\.json$/,
+         use: {
+           loader: 'json-loader'
+         }
+       }
     ]
   }
 }
